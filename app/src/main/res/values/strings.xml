@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QR Scan</string>
+    <string name="message"> "This Application Needs Camera Permission To Work Properly"</string>
+</resources>
