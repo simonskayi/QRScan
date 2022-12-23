@@ -64,12 +64,14 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
          decodeCallback = DecodeCallback {
              runOnUiThread {
               scanResult.text = it.text
-                 if(scanResult.text.contains("https://") ||scanResult.text.contains(".com")){
+                 if(scanResult.text.contains("https://") || scanResult.text.contains(".com")){
                      visitButton.visibility = View.VISIBLE
 
                      visitButton.setOnClickListener {
 
                      }
+                 } else{
+                     visitButton.visibility = View.GONE
                  }
 
              }
@@ -80,7 +82,6 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
                  Toast.makeText(this@MainActivity, "$errorMessage", Toast.LENGTH_SHORT).show()
              }
          }
-
          scanner.setOnClickListener {
              codeScan.startPreview()
          }
@@ -98,8 +99,6 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
     }
 
     // Handling Runtime Permission with the Easy Library
-
-
   private fun requestCameraPermission(){
         EasyPermissions.requestPermissions(this,
             "This Application Needs Camera Permission To Work Properly ",
@@ -116,7 +115,7 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
-        
+
     }
 
 
