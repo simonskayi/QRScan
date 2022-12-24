@@ -23,10 +23,12 @@ import com.vmadalin.easypermissions.dialogs.SettingsDialog
 
 
 class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
+
     private lateinit var scanner: CodeScannerView
     private lateinit var codeScan: CodeScanner
     private lateinit var scanResult: TextView
     private lateinit var visitButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,19 +39,16 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
       requestCameraPermission()
            startScanning()
 
-
-
-
-
-
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this@MainActivity)
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,
+            this@MainActivity)
     }
 
  private fun startScanning(){
@@ -85,7 +84,7 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
 
          errorCallback = ErrorCallback { errorMessage->
              runOnUiThread {
-                 Toast.makeText(this@MainActivity, "$errorMessage", Toast.LENGTH_SHORT).show()
+           Toast.makeText(this@MainActivity, "$errorMessage", Toast.LENGTH_SHORT).show()
              }
          }
          scanner.setOnClickListener {
