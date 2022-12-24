@@ -2,6 +2,8 @@ package com.kwekboss.qrscan
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
@@ -61,14 +63,18 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
          isAutoFocusEnabled = true
          isFlashEnabled = false
 
-         decodeCallback = DecodeCallback {
+         decodeCallback = DecodeCallback { scannedResult->
              runOnUiThread {
-              scanResult.text = it.text
+              scanResult.text = scannedResult.text
                  if(scanResult.text.contains("https://") || scanResult.text.contains(".com")){
                      visitButton.visibility = View.VISIBLE
 
                      visitButton.setOnClickListener {
+                       val url = Uri.parse(scannedResult.text)
+                         val urlIntent = Intent(Intent.ACTION_VIEW,url)
 
+                         val chooser = Intent.createChooser(urlIntent,"Browse Using...")
+                         startActivity(chooser)
                      }
                  } else{
                      visitButton.visibility = View.GONE
@@ -101,7 +107,7 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
     // Handling Runtime Permission with the Easy Library
   private fun requestCameraPermission(){
         EasyPermissions.requestPermissions(this,
-            "This Application Needs Camera Permission To Work Properly ",
+            getString(R.string.message),
             CAMERA_REQUEST_CODE,Manifest.permission.CAMERA)
     }
 
