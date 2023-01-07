@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks{
         super.onPause()
     }
 
-    // Handling Runtime Permission with the Easy Library
+    // Handling Runtime Permission Using the Easy Library
   private fun requestCameraPermission(){
         EasyPermissions.requestPermissions(this,
             getString(R.string.message),
